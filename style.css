@@ -1,0 +1,25 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #646464;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #ffffff;
+
+  border-radius: 3px;
+  box-shadow:0 10px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.19) !important
+}
+
+#slider {
+  margin: 1rem;
+}
