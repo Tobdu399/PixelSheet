@@ -5,17 +5,26 @@ let zoom;
 let canvas_width;
 let canvas_height;
 
+let brushSize = 20;
+let brushColor = "rgb(255, 0, 0)";
+
 let gridX = 36;
 let gridY = 19
+let showGrid = true;
+let menuIsOpen = false;
 
 // Sliders
 let scale_slider;
 let gridX_slider;
 let gridY_slider;
+let scale_slider_label
+let gridx_slider_label
+let gridy_slider_label
 
 // Strokes
 let strokes = [];
 let stroke_in_progress = [];
+let undone_strokes = [];
 let pencil_down = false;
 
 function updateCanvas() {
@@ -30,15 +39,17 @@ function updateCanvas() {
 }
 
 function drawGrid() {
-    stroke(200);
-    strokeWeight(1);
+    if (showGrid) {
+        stroke(200);
+        strokeWeight(1);
 
-    for (let x=width/gridX; x<width; x+=width/gridX) {
-        line(x, 0, x, height);
-    }
+        for (let x=(width/gridX); x<width; x+=width/gridX) {
+            line(x, 0, x, height);
+        }
 
-    for (let y=height/gridY; y<height; y+=height/gridY) {
-        line(0, y, width, y);
+        for (let y=height/gridY; y<height; y+=height/gridY) {
+            line(0, y, width, y);
+        }
     }
 }
 
@@ -53,42 +64,82 @@ function mouseReleased() {
 }
 
 function drawStrokes() {
-    fill(0);
-
-    if (pencil_down) {
-        stroke_in_progress.push([mouseX, mouseY])
-    } else if (!pencil_down && stroke_in_progress.length > 0) {
-        strokes.push(stroke_in_progress);
-        stroke_in_progress = [];
+    for (finished_stroke of strokes) {
+        for (let current_stroke=0; current_stroke<finished_stroke.length-1; current_stroke++) {
+            stroke(finished_stroke[current_stroke][3]);
+            strokeWeight(finished_stroke[current_stroke][2]*scale);
+            line(finished_stroke[current_stroke][0]*scale, finished_stroke[current_stroke][1]*scale, finished_stroke[current_stroke+1][0]*scale, finished_stroke[current_stroke+1][1]*scale)
+        }
     }
-    
+
     if (stroke_in_progress.length > 1) {
         for (let current_stroke=0; current_stroke<stroke_in_progress.length-1; current_stroke++) {
-            stroke(0);
-            strokeWeight(2);
+            stroke(stroke_in_progress[current_stroke][3]);
+            strokeWeight(stroke_in_progress[current_stroke][2]*scale);
             line(stroke_in_progress[current_stroke][0], stroke_in_progress[current_stroke][1], stroke_in_progress[current_stroke+1][0], stroke_in_progress[current_stroke+1][1])
         }
     }
 
-    for (finished_stroke of strokes) {
-        for (let current_stroke=0; current_stroke<finished_stroke.length-1; current_stroke++) {
-            stroke(0);
-            strokeWeight(2);
-            line(finished_stroke[current_stroke][0]*scale, finished_stroke[current_stroke][1]*scale, finished_stroke[current_stroke+1][0]*scale, finished_stroke[current_stroke+1][1]*scale)
+    if (pencil_down) {
+        if (!menuIsOpen)
+            stroke_in_progress.push([mouseX, mouseY, brushSize, brushColor])
+        else {
+            strokes.push(stroke_in_progress);
+            stroke_in_progress = [];
         }
+    } else if (!pencil_down && stroke_in_progress.length > 0) {
+        strokes.push(stroke_in_progress);
+        stroke_in_progress = [];
     }
 }
 
+function toggleMenu() {
+    menuIsOpen = !menuIsOpen;
+}
+
+function toggleGrid() {
+    showGrid = !showGrid;
+}
+
+function updateSliders() {
+    scale_slider_label.innerHTML = "Zoom   " + parseFloat(scale_slider.value).toFixed(1);
+    gridx_slider_label.innerHTML = "Canvas Width   " + parseInt(gridX_slider.value);
+    gridy_slider_label.innerHTML = "Canvas Height   " + parseInt(gridY_slider.value);
+}
+
+function undo() {
+    undone_strokes.push(strokes[strokes.length-1]);
+    strokes.pop();
+}
+
+function redo() {
+    strokes.push(undone_strokes[undone_strokes.length-1]);
+    undone_strokes.pop();
+}
+
+function clearScreen() {
+    strokes = [];
+    stroke_in_progress = [];
+    undone_strokes = [];
+    pencil_down = false;
+}
+
 function setup() {
-    frameRate(50);
+    frameRate(60);
 
     canvas_width = windowWidth/2;
     canvas_height = canvas_width;
     canvas = createCanvas(gridX*zoom, gridY*zoom);
 
+    // Sliders
     scale_slider = document.getElementById("scale-slider")
     gridX_slider = document.getElementById("gridx-slider")
     gridY_slider = document.getElementById("gridy-slider")
+
+    // Sliders' labels
+    scale_slider_label = document.getElementById("scale-slider-label");
+    gridx_slider_label = document.getElementById("gridx-slider-label");
+    gridy_slider_label = document.getElementById("gridy-slider-label");
 }
 
 function draw() {
@@ -96,4 +147,5 @@ function draw() {
     updateCanvas();
     drawGrid();
     drawStrokes();
+    updateSliders();
 }

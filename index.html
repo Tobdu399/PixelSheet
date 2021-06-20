@@ -8,16 +8,54 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="libraries/p5.min.js"></script>
+    <script src="lib/p5.min.js"></script>
   </head>
 
   <body>
     <script src="pixelsheet.js"></script>
 
-    <div class="sliders">
-      <input type="range" min=10 max=30 value=20 step=0.1 id="scale-slider">
-      <input type="range" min=5 max=50 value=36 step=1 id="gridx-slider">
-      <input type="range" min=5 max=50 value=25 step=1 id="gridy-slider">
+    <div id="toolbar" class="toolbar" onmouseover="toggleMenu()" onmouseout="toggleMenu()">
+      <div id="toolbar-itemholder">
+        <h3 id="toolbar-title">Toolbar</h3>
+
+        <label class="container">Hide Grid
+          <input type="checkbox" onclick="toggleGrid()">
+          <span class="checkmark"></span>
+        </label>
+
+        <label class="image-container" onclick="undo()">Undo
+          <img src="lib/images/undo.png">
+        </label>
+
+        <label class="image-container" onclick="redo()">Redo
+          <img src="lib/images/redo.png">
+        </label>
+
+        <label class="image-container" onclick="clearScreen()">Clear
+          <img src="lib/images/trashcan.png">
+        </label>
+
+        <label class="slider-container">
+          <pre id="scale-slider-label">Zoom   {value}</pre>
+          <input type="range" min=10 max=30 value=20 step=0.1 id="scale-slider">
+        </label>
+
+        <label class="slider-container">
+          <pre id="gridx-slider-label">Canvas Width   {value}</pre>
+          <input type="range" min=5 max=50 value=36 step=1 id="gridx-slider">
+        </label>
+
+        <label class="slider-container">
+          <pre id="gridy-slider-label">Canvas Height  {value}</pre>
+          <input type="range" min=5 max=50 value=25 step=1 id="gridy-slider">
+        </label>
+      </div>
+    </div>
+
+    <div id="brush-options" class="brush-options" onmouseover="toggleMenu()" onmouseout="toggleMenu()">
+      <div id="brush-options-itemholder">
+        <h3 id="brush-options-title">Brush options</h3>
+      </div>
     </div>
   </body>
   </html>
