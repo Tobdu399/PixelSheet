@@ -250,7 +250,6 @@ canvas {
 .container:hover {
   background-color: #439b46;
   border-radius: 0 5px 5px 0;
-  transform: scale(1.03);
 }
 
 .container:active {

@@ -194,7 +194,7 @@ function saveSheet() {
 }
 
 function getFileName() {
-    let name = prompt("Please give a name for your sheet (default: saved-sheet.png)")
+    let name = prompt("Please give a name for your sheet. It will be saved in PNG format (default: pixelsheet-unnamed-sheet.png)")
     if (name != null) {
         if (name != "") {
             if (name.substr(name.length-4) != ".png") {
@@ -202,7 +202,7 @@ function getFileName() {
             }
             return name;
         } else {
-            name = "saved-sketch.png";
+            name = "pixelsheet-unnamed-sheet.png";
             return name;
         }
     }
