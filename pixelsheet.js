@@ -17,9 +17,11 @@ let menuIsOpen = false;
 let scale_slider;
 let gridX_slider;
 let gridY_slider;
-let scale_slider_label
-let gridx_slider_label
-let gridy_slider_label
+let brush_slider;
+let scale_slider_label;
+let gridx_slider_label;
+let gridy_slider_label;
+let brush_slider_label;
 
 // Strokes
 let strokes = [];
@@ -84,12 +86,16 @@ function drawStrokes() {
         if (!menuIsOpen)
             stroke_in_progress.push([mouseX, mouseY, brushSize, brushColor])
         else {
+            if (stroke_in_progress.length > 0) {
+                strokes.push(stroke_in_progress);
+                stroke_in_progress = [];
+            }
+        }
+    } else if (!pencil_down && stroke_in_progress.length > 0) {
+        if (stroke_in_progress.length > 0) {
             strokes.push(stroke_in_progress);
             stroke_in_progress = [];
         }
-    } else if (!pencil_down && stroke_in_progress.length > 0) {
-        strokes.push(stroke_in_progress);
-        stroke_in_progress = [];
     }
 }
 
@@ -107,14 +113,27 @@ function updateSliders() {
     gridy_slider_label.innerHTML = "Canvas Height   " + parseInt(gridY_slider.value);
 }
 
+function updateBrush() {
+    brushSize = brush_slider.value;
+    brush_slider_label.innerHTML = "Brush size:   " + brushSize;
+}
+
+function setColor(color) {
+    brushColor = color;
+}
+
 function undo() {
-    undone_strokes.push(strokes[strokes.length-1]);
-    strokes.pop();
+    if (strokes.length > 0) {
+        undone_strokes.push(strokes[strokes.length-1]);
+        strokes.pop();
+    }
 }
 
 function redo() {
-    strokes.push(undone_strokes[undone_strokes.length-1]);
-    undone_strokes.pop();
+    if (undone_strokes.length > 0) {
+        strokes.push(undone_strokes[undone_strokes.length-1]);
+        undone_strokes.pop();
+    }
 }
 
 function clearScreen() {
@@ -132,14 +151,19 @@ function setup() {
     canvas = createCanvas(gridX*zoom, gridY*zoom);
 
     // Sliders
-    scale_slider = document.getElementById("scale-slider")
-    gridX_slider = document.getElementById("gridx-slider")
-    gridY_slider = document.getElementById("gridy-slider")
+    scale_slider = document.getElementById("scale-slider");
+    gridX_slider = document.getElementById("gridx-slider");
+    gridY_slider = document.getElementById("gridy-slider");
+
+    brush_slider = document.getElementById("brush-slider");
 
     // Sliders' labels
     scale_slider_label = document.getElementById("scale-slider-label");
     gridx_slider_label = document.getElementById("gridx-slider-label");
     gridy_slider_label = document.getElementById("gridy-slider-label");
+
+    brush_slider_label = document.getElementById("brush-slider-label");
+
 }
 
 function draw() {
@@ -147,5 +171,6 @@ function draw() {
     updateCanvas();
     drawGrid();
     drawStrokes();
+    updateBrush();
     updateSliders();
 }

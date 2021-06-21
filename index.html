@@ -55,6 +55,26 @@
     <div id="brush-options" class="brush-options" onmouseover="toggleMenu()" onmouseout="toggleMenu()">
       <div id="brush-options-itemholder">
         <h3 id="brush-options-title">Brush options</h3>
+  
+        <label class="slider-container">
+          <pre id="brush-slider-label">Brush size  {value}</pre>
+          <input type="range" min=2 max=30 value=4 step=1 id="brush-slider">
+        </label>
+
+        <dl class="colorpalette">
+          <dt id="colorbtn" style="background-color:rgb(0,0,0)" onclick="setColor('rgb(0,0,0)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(255,255,255)" onclick="setColor('rgb(255,255,255)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(128,128,128)" onclick="setColor('rgb(128,128,128)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(0,128,0)" onclick="setColor('rgb(0,128,0)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(76,175,80)" onclick="setColor('rgb(76,175,80)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(255,0,0)" onclick="setColor('rgb(255,0,0)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(255,165,0)" onclick="setColor('rgb(255,165,0)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(255,255,0)" onclick="setColor('rgb(255,255,0)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(30,144,255)" onclick="setColor('rgb(30,144,255)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(0,0,255)" onclick="setColor('rgb(0,0,255)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(173,0,173)" onclick="setColor('rgb(173,0,173)')"></dt>
+          <dt id="colorbtn" style="background-color:rgb(255,192,203)" onclick="setColor('rgb(255,192,203)')"></dt>
+        </dl>
       </div>
     </div>
   </body>

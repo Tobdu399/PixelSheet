@@ -106,7 +106,7 @@ canvas {
   overflow: hidden;
   position: relative;
 
-  max-height: 320px;
+  max-height: 340px;
 
   z-index: 5;
 }
@@ -288,4 +288,24 @@ canvas {
   height: 25px;
   width: 25px;
   border-radius: 0 5px 5px 0;
+}
+
+.colorpalette {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 270px;
+  padding-left: 15px;
+}
+
+#colorbtn {
+  border: 0.2rem solid #ececec;
+  border-radius: 2px;
+  margin: 0.5rem;
+  height: 2rem;
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+#colorbtn:hover {
+  transform: scale(1.1);
 }
