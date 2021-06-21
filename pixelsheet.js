@@ -11,7 +11,8 @@ let brushColor = "rgb(255, 0, 0)";
 let gridX = 36;
 let gridY = 19
 let showGrid = true;
-let menuIsOpen = false;
+let toolbarIsOpen = false;
+let brushoptionsIsOpen = false;
 
 // Sliders
 let scale_slider;
@@ -28,6 +29,10 @@ let strokes = [];
 let stroke_in_progress = [];
 let undone_strokes = [];
 let pencil_down = false;
+
+// Menu options
+let colorsHidden = true;
+let optionsHidden = true;
 
 function updateCanvas() {
     if (scale_slider.value != zoom || gridX_slider.value != gridX || gridY_slider.value != gridY) {
@@ -83,7 +88,7 @@ function drawStrokes() {
     }
 
     if (pencil_down) {
-        if (!menuIsOpen)
+        if (!toolbarIsOpen && !brushoptionsIsOpen)
             stroke_in_progress.push([mouseX, mouseY, brushSize, brushColor])
         else {
             if (stroke_in_progress.length > 0) {
@@ -99,8 +104,12 @@ function drawStrokes() {
     }
 }
 
-function toggleMenu() {
-    menuIsOpen = !menuIsOpen;
+function toggleToolbar() {
+    toolbarIsOpen = !toolbarIsOpen;
+}
+
+function toggleBrushOptions() {
+    brushoptionsIsOpen = !brushoptionsIsOpen;
 }
 
 function toggleGrid() {
@@ -143,6 +152,31 @@ function clearScreen() {
     pencil_down = false;
 }
 
+function showOptions() {
+    if (optionsHidden && toolbarIsOpen) {
+        document.getElementById("toolbar-container").style.display = "block";
+        optionsHidden = false;
+    } else if (!optionsHidden && !toolbarIsOpen) {
+        setTimeout(() => {
+            document.getElementById("toolbar-container").style.display = "none";
+            optionsHidden = true;
+        }, 400);
+    }
+}
+
+function showColors() {
+    if (colorsHidden && brushoptionsIsOpen) {
+        document.getElementById("colorpalette").style.display = "grid";
+        colorsHidden = false;
+    } else if (!colorsHidden && !brushoptionsIsOpen) {
+        // Add a delay for hiding the colors, so that the menu is certainly closed before the colors hide
+        setTimeout(() => {
+            document.getElementById("colorpalette").style.display = "none";
+            colorsHidden = true;
+        }, 400);
+    }
+}
+
 function setup() {
     frameRate(60);
 
@@ -173,4 +207,6 @@ function draw() {
     drawStrokes();
     updateBrush();
     updateSliders();
+    showColors();
+    showOptions();
 }

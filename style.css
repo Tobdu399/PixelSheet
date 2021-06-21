@@ -3,6 +3,24 @@
   src: url("lib/fonts/Poppins.ttf");
 }
 
+@keyframes fadeIn {
+  from {
+      opacity: 0%;
+  } to {
+      opacity: 100%;
+  }
+}
+
+@keyframes floatIn {
+  from {
+      opacity: 0%;
+      transform: translateY(50%);
+  } to {
+      opacity: 100%;
+      transform: translateY(0);
+  }
+}
+
 :root {
   --toolbar-width: 350px;
 }
@@ -47,6 +65,17 @@ canvas {
 
 #toolbar-itemholder:hover {
   height: 100%;
+}
+
+.toolbar-container {
+  margin: 0;
+  display: none;
+}
+
+#toolbar-label {
+  animation: floatIn 0.3s ease forwards;
+  animation-delay: calc(var(--order) * 80ms);
+  animation-fill-mode: both;
 }
 
 #toolbar {
@@ -291,7 +320,7 @@ canvas {
 }
 
 .colorpalette {
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr 1fr;
   width: 270px;
   padding-left: 15px;
@@ -304,6 +333,10 @@ canvas {
   height: 2rem;
   transition: 0.1s ease-in-out;
   cursor: pointer;
+
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: calc(var(--order) * 80ms);
+  animation-fill-mode: both;
 }
 
 #colorbtn:hover {

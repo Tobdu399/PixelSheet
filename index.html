@@ -14,45 +14,47 @@
   <body>
     <script src="pixelsheet.js"></script>
 
-    <div id="toolbar" class="toolbar" onmouseover="toggleMenu()" onmouseout="toggleMenu()">
+    <div id="toolbar" class="toolbar" onmouseover="toggleToolbar()" onmouseout="toggleToolbar()">
       <div id="toolbar-itemholder">
         <h3 id="toolbar-title">Toolbar</h3>
 
-        <label class="container">Hide Grid
-          <input type="checkbox" onclick="toggleGrid()">
-          <span class="checkmark"></span>
-        </label>
-
-        <label class="image-container" onclick="undo()">Undo
-          <img src="lib/images/undo.png">
-        </label>
-
-        <label class="image-container" onclick="redo()">Redo
-          <img src="lib/images/redo.png">
-        </label>
-
-        <label class="image-container" onclick="clearScreen()">Clear
-          <img src="lib/images/trashcan.png">
-        </label>
-
-        <label class="slider-container">
-          <pre id="scale-slider-label">Zoom   {value}</pre>
-          <input type="range" min=10 max=30 value=20 step=0.1 id="scale-slider">
-        </label>
-
-        <label class="slider-container">
-          <pre id="gridx-slider-label">Canvas Width   {value}</pre>
-          <input type="range" min=5 max=50 value=36 step=1 id="gridx-slider">
-        </label>
-
-        <label class="slider-container">
-          <pre id="gridy-slider-label">Canvas Height  {value}</pre>
-          <input type="range" min=5 max=50 value=25 step=1 id="gridy-slider">
-        </label>
+        <dl id="toolbar-container" class="toolbar-container">
+          <label id="toolbar-label" style="--order:1" class="container">Hide Grid
+            <input type="checkbox" onclick="toggleGrid()">
+            <span class="checkmark"></span>
+          </label>
+  
+          <label id="toolbar-label" style="--order:2" class="image-container" onclick="undo()">Undo
+            <img src="lib/images/undo.png">
+          </label>
+  
+          <label id="toolbar-label" style="--order:3" class="image-container" onclick="redo()">Redo
+            <img src="lib/images/redo.png">
+          </label>
+  
+          <label id="toolbar-label" style="--order:4" class="image-container" onclick="clearScreen()">Clear
+            <img src="lib/images/trashcan.png">
+          </label>
+  
+          <label id="toolbar-label" style="--order:5" class="slider-container">
+            <pre id="scale-slider-label">Zoom   {value}</pre>
+            <input type="range" min=10 max=30 value=20 step=0.1 id="scale-slider">
+          </label>
+  
+          <label id="toolbar-label" style="--order:6" class="slider-container">
+            <pre id="gridx-slider-label">Canvas Width   {value}</pre>
+            <input type="range" min=5 max=50 value=36 step=1 id="gridx-slider">
+          </label>
+  
+          <label id="toolbar-label" style="--order:7" class="slider-container">
+            <pre id="gridy-slider-label">Canvas Height  {value}</pre>
+            <input type="range" min=5 max=50 value=25 step=1 id="gridy-slider">
+          </label>
+        </dl>
       </div>
     </div>
 
-    <div id="brush-options" class="brush-options" onmouseover="toggleMenu()" onmouseout="toggleMenu()">
+    <div id="brush-options" class="brush-options" onmouseover="toggleBrushOptions()" onmouseout="toggleBrushOptions()">
       <div id="brush-options-itemholder">
         <h3 id="brush-options-title">Brush options</h3>
   
@@ -61,19 +63,19 @@
           <input type="range" min=2 max=30 value=4 step=1 id="brush-slider">
         </label>
 
-        <dl class="colorpalette">
-          <dt id="colorbtn" style="background-color:rgb(0,0,0)" onclick="setColor('rgb(0,0,0)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(255,255,255)" onclick="setColor('rgb(255,255,255)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(128,128,128)" onclick="setColor('rgb(128,128,128)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(0,128,0)" onclick="setColor('rgb(0,128,0)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(76,175,80)" onclick="setColor('rgb(76,175,80)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(255,0,0)" onclick="setColor('rgb(255,0,0)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(255,165,0)" onclick="setColor('rgb(255,165,0)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(255,255,0)" onclick="setColor('rgb(255,255,0)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(30,144,255)" onclick="setColor('rgb(30,144,255)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(0,0,255)" onclick="setColor('rgb(0,0,255)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(173,0,173)" onclick="setColor('rgb(173,0,173)')"></dt>
-          <dt id="colorbtn" style="background-color:rgb(255,192,203)" onclick="setColor('rgb(255,192,203)')"></dt>
+        <dl class="colorpalette" id="colorpalette">
+          <dt id="colorbtn" style="--order:1;background-color:rgb(0,0,0)" onclick="setColor('rgb(0,0,0)')"></dt>
+          <dt id="colorbtn" style="--order:2;background-color:rgb(255,255,255)" onclick="setColor('rgb(255,255,255)')"></dt>
+          <dt id="colorbtn" style="--order:3;background-color:rgb(128,128,128)" onclick="setColor('rgb(128,128,128)')"></dt>
+          <dt id="colorbtn" style="--order:4;background-color:rgb(0,128,0)" onclick="setColor('rgb(0,128,0)')"></dt>
+          <dt id="colorbtn" style="--order:5;background-color:rgb(76,175,80)" onclick="setColor('rgb(76,175,80)')"></dt>
+          <dt id="colorbtn" style="--order:6;background-color:rgb(255,0,0)" onclick="setColor('rgb(255,0,0)')"></dt>
+          <dt id="colorbtn" style="--order:7;background-color:rgb(255,165,0)" onclick="setColor('rgb(255,165,0)')"></dt>
+          <dt id="colorbtn" style="--order:8;background-color:rgb(255,255,0)" onclick="setColor('rgb(255,255,0)')"></dt>
+          <dt id="colorbtn" style="--order:9;background-color:rgb(30,144,255)" onclick="setColor('rgb(30,144,255)')"></dt>
+          <dt id="colorbtn" style="--order:10;background-color:rgb(0,0,255)" onclick="setColor('rgb(0,0,255)')"></dt>
+          <dt id="colorbtn" style="--order:11;background-color:rgb(173,0,173)" onclick="setColor('rgb(173,0,173)')"></dt>
+          <dt id="colorbtn" style="--order:12;background-color:rgb(255,192,203)" onclick="setColor('rgb(255,192,203)')"></dt>
         </dl>
       </div>
     </div>
