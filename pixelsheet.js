@@ -157,6 +157,7 @@ function showOptions() {
         document.getElementById("toolbar-container").style.display = "block";
         optionsHidden = false;
     } else if (!optionsHidden && !toolbarIsOpen) {
+        // Add a delay for hiding the toolbar, so that the menu is certainly closed before the options hide
         setTimeout(() => {
             document.getElementById("toolbar-container").style.display = "none";
             optionsHidden = true;
@@ -177,12 +178,63 @@ function showColors() {
     }
 }
 
+// File handling
+
+function saveSheet() {
+    html2canvas(document.getElementById("sheet"))
+        .then(canvas => {
+            // This code will run once the promise has completed
+            let img = canvas.toDataURL("image/png");
+            let filename = getFileName();
+
+            if (filename != undefined) {
+                download(img, filename);
+            }
+    });
+}
+
+function getFileName() {
+    let name = prompt("Please give a name for your sheet (default: saved-sheet.png)")
+    if (name != null) {
+        if (name != "") {
+            if (name.substr(name.length-4) != ".png") {
+                name += ".png";
+            }
+            return name;
+        } else {
+            name = "saved-sketch.png";
+            return name;
+        }
+    }
+}
+
+function download(uri, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+        link.href = uri;
+        link.download = filename;
+        // Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        // simulate click
+        link.click();
+
+        // remove the link when done
+        document.body.removeChild(link);
+    } else {
+        window.open(uri);
+    }
+}
+
+// ----------------------------------------
+
 function setup() {
     frameRate(60);
 
     canvas_width = windowWidth/2;
     canvas_height = canvas_width;
     canvas = createCanvas(gridX*zoom, gridY*zoom);
+    canvas.id("sheet");
 
     // Sliders
     scale_slider = document.getElementById("scale-slider");

@@ -50,6 +50,10 @@ canvas {
   box-shadow:0 10px 16px 0 rgba(0,0,0,0.3), 0 6px 20px 0 rgba(0,0,0,0.19) !important
 }
 
+* {
+  letter-spacing: 0.1rem;
+}
+
 /* Toolbar */
 
 #toolbar-itemholder {
@@ -58,7 +62,7 @@ canvas {
   overflow: hidden;
   position: relative;
 
-  max-height: 440px;
+  max-height: 480px;
 
   z-index: 10;
 }

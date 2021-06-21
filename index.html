@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="lib/p5.min.js"></script>
+    <script src="lib/html2canvas.js"></script>
   </head>
 
   <body>
@@ -35,18 +36,22 @@
           <label id="toolbar-label" style="--order:4" class="image-container" onclick="clearScreen()">Clear
             <img src="lib/images/trashcan.png">
           </label>
+
+          <label id="toolbar-label" style="--order:5" class="image-container" onclick="saveSheet()">Save
+            <img src="lib/images/floppydisk.png">
+          </label>
   
-          <label id="toolbar-label" style="--order:5" class="slider-container">
+          <label id="toolbar-label" style="--order:6" class="slider-container">
             <pre id="scale-slider-label">Zoom   {value}</pre>
             <input type="range" min=10 max=30 value=20 step=0.1 id="scale-slider">
           </label>
   
-          <label id="toolbar-label" style="--order:6" class="slider-container">
+          <label id="toolbar-label" style="--order:7" class="slider-container">
             <pre id="gridx-slider-label">Canvas Width   {value}</pre>
             <input type="range" min=5 max=50 value=36 step=1 id="gridx-slider">
           </label>
   
-          <label id="toolbar-label" style="--order:7" class="slider-container">
+          <label id="toolbar-label" style="--order:8" class="slider-container">
             <pre id="gridy-slider-label">Canvas Height  {value}</pre>
             <input type="range" min=5 max=50 value=25 step=1 id="gridy-slider">
           </label>
