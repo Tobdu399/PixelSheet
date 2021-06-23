@@ -1,6 +1,11 @@
 @font-face {
   font-family: "Poppins";
-  src: url("lib/fonts/Poppins.ttf");
+  src: url("lib/fonts/poppins.ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("lib/fonts/robotomono.ttf");
 }
 
 @keyframes fadeIn {
@@ -77,6 +82,9 @@ canvas {
 }
 
 #toolbar-label {
+  font-family: "Roboto";
+  letter-spacing: 0.1rem;
+  
   animation: floatIn 0.3s ease forwards;
   animation-delay: calc(var(--order) * 80ms);
   animation-fill-mode: both;
@@ -85,7 +93,6 @@ canvas {
 #toolbar {
   margin-top: 20px;
   font-size: 22px;
-  font-family: "Poppins";
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -116,6 +123,7 @@ canvas {
 }
 
 #toolbar-title {
+  font-family: "Poppins";
   font-size: 18px;
   color: rgb(240, 240, 240);
   text-transform: uppercase;
@@ -151,7 +159,7 @@ canvas {
 #brush-options {
   padding-top: 150px;
   font-size: 22px;
-  font-family: "Poppins";
+  font-family: "Roboto";
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -182,6 +190,7 @@ canvas {
 }
 
 #brush-options-title {
+  font-family: "Poppins";
   font-size: 18px;
   color: rgb(240, 240, 240);
   text-transform: uppercase;
@@ -203,7 +212,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 8px 0 20px 15px;
+  margin: 10px 0 20px 15px;
   height: 25px;
   width: 25px;
   background-color: rgb(240, 240, 240);
@@ -241,7 +250,7 @@ canvas {
   position: relative;
   cursor: pointer;
 
-  padding: 5px 0 5px 60px;
+  padding: 0.5rem 0 0.5rem 60px;
 
   width: 235px;
   transition: .2s ease;
@@ -287,7 +296,8 @@ canvas {
 }
 
 .slider-container pre {
-  font-family: "Poppins";
+  font-family: "Roboto";
+  letter-spacing: 0.1rem;
   margin-bottom: -5px;
 }
 
@@ -296,7 +306,7 @@ canvas {
   position: relative;
   cursor: pointer;
 
-  padding: 5px 0 5px 60px;
+  padding: 0.5rem 0 0.5rem 60px;
 
   width: 235px;
   transition: .2s ease;
@@ -316,10 +326,9 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 7px 0 20px 15px;
+  margin: 10px 0 20px 15px;
   height: 25px;
   width: 25px;
-  border-radius: 0 5px 5px 0;
 }
 
 .colorpalette {
